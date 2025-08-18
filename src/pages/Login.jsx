@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "/logo.png";
+import attendance from "/attendance.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const Login = () => {
   };
 
   return (
-    <div className="container-fluid vh-100 d-flex align-items-center justify-content-center bg-light">
+    <div className="container-fluid d-flex align-items-center justify-content-center bg-light">
       <div
         className="row w-100 shadow-lg bg-white rounded"
         style={{ maxWidth: "1000px" }}
@@ -20,7 +21,7 @@ const Login = () => {
         {/* Left side illustration */}
         <div className="col-md-6 d-none d-md-flex align-items-center justify-content-center p-4">
           <img
-            src=""
+            src={attendance}
             alt="Illustration"
             className="img-fluid"
             style={{ maxHeight: "450px" }}
