@@ -1,43 +1,45 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Users, MapPin, CalendarCheck, ClipboardList } from "lucide-react";
 
-const cardsData = [
-  {
-    id: 1,
-    title: "Attendance",
-    value: "85%",
-    link: "/attendance",
-    bg: "bg-blue-500",
-  },
-  {
-    id: 2,
-    title: "Students",
-    value: "320",
-    link: "/students",
-    bg: "bg-green-500",
-  },
-  {
-    id: 3,
-    title: "Teachers",
-    value: "25",
-    link: "/teachers",
-    bg: "bg-purple-500",
-  },
-  {
-    id: 4,
-    title: "Classes",
-    value: "12",
-    link: "/classes",
-    bg: "bg-orange-500",
-  },
-];
+const DashboardCards = () => {
+  const cards = [
+    {
+      title: "Active Users",
+      value: 12,
+      icon: <Users size={32} color="#0d6efd" />, // blue
+    },
+    {
+      title: "On Leave",
+      value: 3,
+      icon: <CalendarCheck size={32} color="#198754" />, // green
+    },
+    {
+      title: "Tasks Assigned",
+      value: 25,
+      icon: <ClipboardList size={32} color="#ffc107" />, // yellow
+    },
+    {
+      title: "Locations Tracked",
+      value: 8,
+      icon: <MapPin size={32} color="#dc3545" />, // red
+    },
+  ];
 
-const Cards = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
-      <h1>cards</h1>
+    <div className="container mt-4">
+      <div className="row">
+        {cards.map((card, index) => (
+          <div key={index} className="col-md-3 mb-4">
+            <div className="card shadow-sm text-center p-3 border-0">
+              <div className="mb-2">{card.icon}</div>
+              <h5 className="fw-bold">{card.title}</h5>
+              <p className="fs-4 mb-0">{card.value}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
-export default Cards;
+export default DashboardCards;

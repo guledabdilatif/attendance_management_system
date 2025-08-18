@@ -9,6 +9,7 @@ import Attendance from './pages/Attendance'
 import Leave from './pages/Leave'
 import Tasks from './pages/Tasks'
 import Employees from './pages/Employees'
+import Report from './pages/Report'
 function App() {
 
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/leave" element={<Leave />} />
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/users" element={<Employees />} />
+          <Route path="/reports" element={<Report />} />
         </Routes>
       </BrowserRouter>
     </>

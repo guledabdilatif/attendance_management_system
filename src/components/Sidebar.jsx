@@ -9,18 +9,35 @@ import {
   Briefcase,
   CalendarDays,
   LogOut,
+  FileText,
 } from "lucide-react";
-
+import logo from "/logo-transparent.png";
 const linkBase =
   "nav-link d-flex align-items-center px-3 py-2 rounded text-decoration-none";
 
 const Sidebar = () => {
   return (
     <aside
-      className="d-flex flex-column bg-dark text-white vh-100 p-3 shadow"
-      style={{ width: "240px" }}
+      className="d-flex flex-column bg-dark text-white p-3 shadow"
+      style={{ width: "240px", height: "150vh" }}
     >
-      <h5 className="fw-bold text-center mb-4">Attendance System</h5>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        // optional, helps vertical centering if parent has height
+      }}>
+        <img
+          src={logo}
+          alt="Logo"
+          style={{
+            filter: 'brightness(0) invert(1)',
+            width: '200px',
+            marginBottom:'12px'
+          }}
+        />
+      </div>
+
 
       <ul className="nav nav-pills flex-column mb-auto">
         <li className="mb-2">
@@ -59,7 +76,7 @@ const Sidebar = () => {
           </NavLink>
         </li>
 
-       
+
         <li className="mb-2">
           <NavLink
             to="/tasks"
@@ -84,14 +101,20 @@ const Sidebar = () => {
             <span>Leave</span>
           </NavLink>
         </li>
+        <li className="mb-2">
+          <NavLink
+            to="/reports"
+            className={({ isActive }) =>
+              `${linkBase} ${isActive ? "bg-primary text-white" : "text-white-50"}`
+            }          >
+            <FileText size={18} className="me-2" />
+            <span>Generate Report</span>
+          </NavLink>
+        </li>
       </ul>
 
-      <div className="mt-auto">
-        <NavLink to="/" className="btn btn-outline-light w-100 d-flex align-items-center justify-content-center gap-2">
-          <LogOut size={18} />
-          Logout
-        </NavLink>
-      </div>
+
+
     </aside>
   );
 };

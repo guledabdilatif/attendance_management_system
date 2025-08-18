@@ -11,7 +11,7 @@ const Attendance = () => {
             </div>
 
             {/* Main Content */}
-            <div className="flex-1 bg-danger p-6" style={{width:'80%', height:'100vh'}}>
+            <div className="p-6" style={{width:'80%', height:'100vh'}}>
                <Navbar />
             
             </div>
