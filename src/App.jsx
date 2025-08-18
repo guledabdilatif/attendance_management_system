@@ -5,15 +5,23 @@ import './App.css'
 import { Route, Routes, BrowserRouter } from 'react-router-dom'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
+import Attendance from './pages/Attendance'
+import Leave from './pages/Leave'
+import Tasks from './pages/Tasks'
+import Employees from './pages/Employees'
 function App() {
-  
+
 
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' Component={Login} />
-          <Route path='/dashboard' Component={Dashboard} />
+          <Route path='/' element={<Login />} />
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path="/attendance" element={<Attendance />} />         
+          <Route path="/leave" element={<Leave />} />
+          <Route path="/tasks" element={<Tasks />} />
+          <Route path="/users" element={<Employees />} />
         </Routes>
       </BrowserRouter>
     </>
