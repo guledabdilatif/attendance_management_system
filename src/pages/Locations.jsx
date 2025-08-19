@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "./Navbar";
+import { Eye, Edit, Trash2, Check, X } from "lucide-react";
 
 const Locations = () => {
-  const counties = [
+  const initialCounties = [
     { code: "001", name: "Mombasa" },
     { code: "002", name: "Kwale" },
     { code: "003", name: "Kilifi" },
@@ -53,6 +54,44 @@ const Locations = () => {
     { code: "047", name: "Nairobi City" },
   ];
 
+  const [counties, setCounties] = useState(initialCounties);
+  const [editing, setEditing] = useState(null);
+  const [editName, setEditName] = useState("");
+
+  // DELETE
+  const handleDelete = (code) => {
+    if (window.confirm("Are you sure you want to delete this county?")) {
+      setCounties(counties.filter((c) => c.code !== code));
+    }
+  };
+
+  // SHOW
+  const handleShow = (county) => {
+    alert(`📍 County Details\n\nCode: ${county.code}\nName: ${county.name}`);
+  };
+
+  // EDIT
+  const handleEdit = (county) => {
+    setEditing(county.code);
+    setEditName(county.name);
+  };
+
+  // SAVE
+  const handleSave = (code) => {
+    setCounties(
+      counties.map((c) =>
+        c.code === code ? { ...c, name: editName } : c
+      )
+    );
+    setEditing(null);
+  };
+
+  // CANCEL
+  const handleCancel = () => {
+    setEditing(null);
+    setEditName("");
+  };
+
   return (
     <div style={{ display: "flex", alignItems: "start" }}>
       {/* Sidebar */}
@@ -65,7 +104,6 @@ const Locations = () => {
         <Navbar />
 
         <div className="container mt-4 border rounded p-2">
-
           {/* Counties Table */}
           <table className="table table-hover table-striped text-center w-100">
             <thead style={{ backgroundColor: "black", color: "white" }}>
@@ -73,6 +111,7 @@ const Locations = () => {
                 <th>#</th>
                 <th>County Code</th>
                 <th>County Name</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -92,14 +131,64 @@ const Locations = () => {
                       {c.code}
                     </span>
                   </td>
-                  <td style={{ color: "black", fontWeight: 500 }}>{c.name}</td>
+                  <td style={{ color: "black", fontWeight: 500 }}>
+                    {editing === c.code ? (
+                      <input
+                        type="text"
+                        value={editName}
+                        onChange={(e) => setEditName(e.target.value)}
+                        className="form-control form-control-sm"
+                      />
+                    ) : (
+                      c.name
+                    )}
+                  </td>
+                  <td>
+                    {editing === c.code ? (
+                      <>
+                        <button
+                          onClick={() => handleSave(c.code)}
+                          className="btn btn-sm btn-success mx-1"
+                        >
+                          <Check size={16} />
+                        </button>
+                        <button
+                          onClick={handleCancel}
+                          className="btn btn-sm btn-secondary mx-1"
+                        >
+                          <X size={16} />
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          onClick={() => handleShow(c)}
+                          className="btn btn-sm btn-outline-dark mx-1"
+                        >
+                          <Eye size={16} />
+                        </button>
+                        <button
+                          onClick={() => handleEdit(c)}
+                          className="btn btn-sm btn-outline-success mx-1"
+                        >
+                          <Edit size={16} />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(c.code)}
+                          className="btn btn-sm btn-outline-danger mx-1"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </>
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>
             <tfoot>
               <tr>
                 <td
-                  colSpan={3}
+                  colSpan={4}
                   className="text-end"
                   style={{ color: "black", fontWeight: 600 }}
                 >

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "./Navbar";
+import { Eye, Edit, Trash2 } from "lucide-react";
 
 const Tasks = () => {
   const [tasks, setTasks] = useState([
@@ -40,11 +41,25 @@ const Tasks = () => {
       {
         id: tasks.length + 1,
         ...newTask,
-        status: "Pending", // system will later update
+        status: "Pending", // default
       },
     ]);
     setNewTask({ employee: "", task: "", dueDate: "" });
     setShowForm(false);
+  };
+
+  const handleDelete = (id) => {
+    setTasks(tasks.filter((t) => t.id !== id));
+  };
+
+  const handleShow = (task) => {
+    alert(`Task: ${task.task}\nAssigned to: ${task.employee}\nDue: ${task.dueDate}`);
+  };
+
+  const handleEdit = (task) => {
+    setNewTask({ employee: task.employee, task: task.task, dueDate: task.dueDate });
+    setTasks(tasks.filter((t) => t.id !== task.id)); // temporarily remove until re-added
+    setShowForm(true);
   };
 
   // Calculate remaining days
@@ -88,6 +103,7 @@ const Tasks = () => {
               <th>Due Date</th>
               <th>Days Remaining</th>
               <th>Status</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -108,6 +124,28 @@ const Tasks = () => {
                   }}
                 >
                   {t.status}
+                </td>
+                <td>
+                  <div className="d-flex justify-content-center gap-2">
+                    <button
+                      className="btn btn-sm btn-outline-primary"
+                      onClick={() => handleShow(t)}
+                    >
+                      <Eye size={16} />
+                    </button>
+                    <button
+                      className="btn btn-sm btn-outline-warning"
+                      onClick={() => handleEdit(t)}
+                    >
+                      <Edit size={16} />
+                    </button>
+                    <button
+                      className="btn btn-sm btn-outline-danger"
+                      onClick={() => handleDelete(t.id)}
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "./Navbar";
+import { Eye, Edit, Trash2 } from "lucide-react"; // ✅ lucide-react icons
 
 const Employees = () => {
   const [employees, setEmployees] = useState([
@@ -39,24 +40,47 @@ const Employees = () => {
     status: "active",
   });
 
+  // Track selected employee for editing / viewing
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
+
   const handleChange = (e) => {
     setNewEmployee({ ...newEmployee, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setEmployees([
-      ...employees,
-      { id: employees.length + 1, ...newEmployee },
-    ]);
-    setNewEmployee({
-      name: "",
-      email: "",
-      role: "",
-      department: "",
-      status: "active",
-    });
+
+    if (selectedEmployee) {
+      // Editing existing employee
+      setEmployees(
+        employees.map((emp) =>
+          emp.id === selectedEmployee.id ? { ...selectedEmployee, ...newEmployee } : emp
+        )
+      );
+      setSelectedEmployee(null);
+    } else {
+      // Adding new employee
+      setEmployees([...employees, { id: employees.length + 1, ...newEmployee }]);
+    }
+
+    setNewEmployee({ name: "", email: "", role: "", department: "", status: "active" });
     setShowForm(false);
+  };
+
+  const handleEdit = (emp) => {
+    setSelectedEmployee(emp);
+    setNewEmployee(emp);
+    setShowForm(true);
+  };
+
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this employee?")) {
+      setEmployees(employees.filter((emp) => emp.id !== id));
+    }
+  };
+
+  const handleView = (emp) => {
+    alert(`Employee Details:\n\nName: ${emp.name}\nEmail: ${emp.email}\nRole: ${emp.role}\nDepartment: ${emp.department}\nStatus: ${emp.status}`);
   };
 
   return (
@@ -71,14 +95,18 @@ const Employees = () => {
         <Navbar />
         <div className="container mt-4">
           <button
-            onClick={() => setShowForm(true)}
+            onClick={() => {
+              setShowForm(true);
+              setSelectedEmployee(null);
+              setNewEmployee({ name: "", email: "", role: "", department: "", status: "active" });
+            }}
             className="btn btn-success btn-sm float-end fs-9"
           >
             + Add Employee
           </button>
 
           {/* Employees Table */}
-          <table className="table table-hover table-striped">
+          <table className="table table-hover table-striped text-center">
             <thead style={{ backgroundColor: "black", color: "white" }}>
               <tr>
                 <th>#</th>
@@ -87,6 +115,7 @@ const Employees = () => {
                 <th>Role</th>
                 <th>Department</th>
                 <th>Status</th>
+                <th>Actions</th> {/* ✅ new column */}
               </tr>
             </thead>
             <tbody>
@@ -99,20 +128,39 @@ const Employees = () => {
                   <td>{emp.department}</td>
                   <td>
                     {emp.status === "active" ? (
-                      <span
-                        className="badge"
-                        style={{ backgroundColor: "green", color: "white" }}
-                      >
+                      <span className="badge" style={{ backgroundColor: "green", color: "white" }}>
                         Active
                       </span>
                     ) : (
-                      <span
-                        className="badge"
-                        style={{ backgroundColor: "red", color: "white" }}
-                      >
+                      <span className="badge" style={{ backgroundColor: "red", color: "white" }}>
                         Inactive
                       </span>
                     )}
+                  </td>
+                  <td>
+                    <div className="d-flex justify-content-center gap-2">
+                      <button
+                        className="btn btn-sm btn-outline-dark"
+                        onClick={() => handleView(emp)}
+                        title="View"
+                      >
+                        <Eye size={16} />
+                      </button>
+                      <button
+                        className="btn btn-sm btn-outline-success"
+                        onClick={() => handleEdit(emp)}
+                        title="Edit"
+                      >
+                        <Edit size={16} />
+                      </button>
+                      <button
+                        className="btn btn-sm btn-outline-danger"
+                        onClick={() => handleDelete(emp.id)}
+                        title="Delete"
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -122,13 +170,13 @@ const Employees = () => {
 
         {/* Popup Form Modal */}
         {showForm && (
-          <div className="fixed inset-0  items-center justify-center" style={{position:'absolute', top:'20px', width:'100%'}}>
-            <div
-              className="bg-white p-5 rounded-3 shadow-lg"
-              style={{ width: "60%" }}
-            >
+          <div
+            className="fixed inset-0 items-center justify-center"
+            style={{ position: "absolute", top: "20px", width: "100%" }}
+          >
+            <div className="bg-white p-5 rounded-3 shadow-lg" style={{ width: "60%" }}>
               <h3 className="mb-3" style={{ color: "black" }}>
-                Add Employee
+                {selectedEmployee ? "Edit Employee" : "Add Employee"}
               </h3>
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
