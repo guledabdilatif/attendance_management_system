@@ -103,6 +103,16 @@ const Sidebar = () => {
         </li>
         <li className="mb-2">
           <NavLink
+            to="/locations"
+            className={({ isActive }) =>
+              `${linkBase} ${isActive ? "bg-primary text-white" : "text-white-50"}`
+            }          >
+            <FileText size={18} className="me-2" />
+            <span>Locations</span>
+          </NavLink>
+        </li>
+        <li className="mb-2">
+          <NavLink
             to="/reports"
             className={({ isActive }) =>
               `${linkBase} ${isActive ? "bg-primary text-white" : "text-white-50"}`

@@ -1,7 +1,7 @@
 import React from 'react'
 import Sidebar from '../components/Sidebar'
 import Navbar from './Navbar'
-import { useState } from 'react'
+import { useState  } from 'react'
 
 const Attendance = () => {
   const [attendances] = useState([

@@ -10,7 +10,8 @@ export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm px-3">
       <div className="container-fluid">
-        <a className="navbar-brand fw-bold text-primary" href="/">
+        <a className="navbar-brand fw-bold text-success" href="/" style={{color:'green'
+        }}>
           Attendance System
         </a>
 

@@ -10,6 +10,8 @@ import Leave from './pages/Leave'
 import Tasks from './pages/Tasks'
 import Employees from './pages/Employees'
 import Report from './pages/Report'
+import Locations from './pages/locations'
+
 function App() {
 
 
@@ -24,6 +26,7 @@ function App() {
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/users" element={<Employees />} />
           <Route path="/reports" element={<Report />} />
+          <Route path="/locations" element={<Locations />} />
         </Routes>
       </BrowserRouter>
     </>
