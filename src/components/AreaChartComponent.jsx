@@ -2,11 +2,11 @@ import React from "react";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 const data = [
-  { date: "Mon", present: 40, absent: 5 },
-  { date: "Tue", present: 38, absent: 7 },
-  { date: "Wed", present: 42, absent: 4 },
-  { date: "Thu", present: 35, absent: 10 },
-  { date: "Fri", present: 45, absent: 2 },
+  { date: "Mon", ActiveUsers: 40, locations: 5 },
+  { date: "Tue", ActiveUsers: 38, locations: 7 },
+  { date: "Wed", ActiveUsers: 42, locations: 4 },
+  { date: "Thu", ActiveUsers: 35, locations: 10 },
+  { date: "Fri", ActiveUsers: 45, locations: 2 },
 ];
 
 export default function AreaChartComponent() {
@@ -20,8 +20,8 @@ export default function AreaChartComponent() {
             <XAxis dataKey="date" />
             <YAxis />
             <Tooltip />
-            <Area type="monotone" dataKey="present" stackId="1" stroke="#28a745" fill="#28a745" />
-            <Area type="monotone" dataKey="absent" stackId="1" stroke="#dc3545" fill="#dc3545" />
+            <Area type="monotone" dataKey="locations" stackId="1" stroke="#28a745" fill="#28a745" />
+            <Area type="monotone" dataKey="ActiveUsers" stackId="1" stroke="#dc3545" fill="#dc3545" />
           </AreaChart>
         </ResponsiveContainer>
       </div>

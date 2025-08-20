@@ -2,9 +2,9 @@ import React from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 const data = [
-  { name: "Present", value: 400 },
-  { name: "Absent", value: 120 },
-  { name: "Late", value: 80 },
+  { name: "Active user", value: 400 },
+  { name: "On Leave", value: 120 },
+  { name: "Task Assigned", value: 80 },
 ];
 
 const COLORS = ["#28a745", "#dc3545", "#ffc107"]; // Green, Red, Yellow

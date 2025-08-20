@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "./Navbar";
 import jsPDF from "jspdf";
+import { Download } from "lucide-react";
 import autoTable from "jspdf-autotable"; // ✅ Correct import
 
 const Report = () => {
@@ -41,7 +42,7 @@ const Report = () => {
           <div className="d-flex justify-content-between align-items-center mb-3">
             <h2 className="fw-bold text-dark">Reports</h2>
             <button onClick={exportPDF} className="btn btn-danger">
-              Export as PDF
+              <Download /> <span>Export as PDF</span>
             </button>
           </div>
 

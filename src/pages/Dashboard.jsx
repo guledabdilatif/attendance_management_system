@@ -15,19 +15,21 @@ const Dashboard = () => {
             </div>
 
             {/* Main Content */}
-            <div className="p-6" style={{ width: '80%', height: '100vh' }}>
+            <div className="p-6" style={{ width: '80%' }}>
                 <Navbar />
                 <Cards />
                 {/* Charts */}
-                <div className="row">
-                    <div className="col-md-6">
-                        <PieChartComponent />
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-6">
+                            <PieChartComponent />
+                        </div>
+                        <div className="col-md-6">
+                            <AreaChartComponent />
+                        </div>
                     </div>
-                    <div className="col-md-6">
-                        <AreaChartComponent />
-                    </div>
-                </div>
                 <AttendanceLogs />
+                </div>
             </div>
         </div>
     );

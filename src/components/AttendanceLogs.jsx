@@ -37,7 +37,7 @@ const AttendanceLogs = () => {
   ];
 
   return (
-    <div className="container mt-4">
+    <div className="mt-4">
       <h4 className="mb-3 fw-bold">Attendance Logs</h4>
       <div className="table-responsive shadow rounded">
         <table className="table table-striped table-hover align-middle mb-0">

@@ -117,8 +117,8 @@ const Sidebar = () => {
             className={({ isActive }) =>
               `${linkBase} ${isActive ? "bg-primary text-white" : "text-white-50"}`
             }          >
-            <FileText size={18} className="me-2" />
-            <span>Generate Report</span>
+            <MapPin size={18} className="me-2"/>
+            <span>Reports</span>
           </NavLink>
         </li>
       </ul>
